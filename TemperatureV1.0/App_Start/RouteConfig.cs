@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace TemperatureV1._0
@@ -17,11 +13,10 @@ namespace TemperatureV1._0
             routes.IgnoreRoute("{resource}.aspx");
 
 
-
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Customer", action = "Login", id = UrlParameter.Optional }
+                "Default",
+                "{controller}/{action}/{id}",
+                new {controller = "Customer", action = "Login", id = UrlParameter.Optional}
             );
         }
     }

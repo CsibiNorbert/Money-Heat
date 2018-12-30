@@ -4,8 +4,9 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="loginHeader"><h2>Login</h2></div>
-
+<div class="loginHeader">
+    <h2>Login</h2>
+</div>
 
 
 @using (Html.BeginForm())
@@ -14,50 +15,48 @@
 
     <div class="form-horizontal">
 
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+        <hr/>
+        @Html.ValidationSummary(true, "", new {@class = "alert alert-danger"})
 
 
         <div class="form-group">
-            <div class="lblUname">@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })</div>
+            <div class="lblUname">@Html.LabelFor(model => model.Username, new {@class = "control-label col-md-2"})</div>
 
             <div class="col-md-10">
                 <div class="uNametxt">
-                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Username, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Username, "", new {@class = "text-danger"})
                 </div>
 
             </div>
         </div>
 
         <div class="form-group">
-            <div class="lblPass">@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })</div>
+            <div class="lblPass">@Html.LabelFor(model => model.Password, new {@class = "control-label col-md-2"})</div>
 
             <div class="col-md-10">
                 <div class="txtPass">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Password, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
                 </div>
 
             </div>
         </div>
-
 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <div class="divbtnLogin">
-                    <input type="submit" value="Login" class="btn btn-success btnLogin" />
-                    
+                    <input type="submit" value="Login" class="btn btn-success btnLogin"/>
+
                 </div>
-                
+
 
             </div>
-            
+
         </div>
-       
+
     </div>
-    
 }
 
 

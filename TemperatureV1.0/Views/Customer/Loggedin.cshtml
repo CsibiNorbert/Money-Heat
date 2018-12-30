@@ -1,93 +1,55 @@
-﻿@using TemperatureV1._0.Models
-
-@{
+﻿@{
     ViewBag.Title = "Loggedin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <html>
 <head>
-  
+
 </head>
 <body>
 <div class="lol">
-    
+
     @if (Session["UserID"] != null)
     {
-
         <div class="userLoggedIn">
             <h2> @Session["Username"].ToString()</h2>
         </div>
         <div class="WholePage">
             @if (ViewBag.DeviceOff == false)
             {
-            <div id="badge2">
+                <div id="badge2">
 
-                <div id="badge" class="badge badge-success">
+                    <div id="badge" class="badge badge-success">
 
-                    <h1 id="badge1" class="badgeDeviceOff">@ViewBag.DailyTempOff</h1>
+                        <h1 id="badge1" class="badgeDeviceOff">@ViewBag.DailyTempOff</h1>
+                    </div>
                 </div>
-            </div>
             }
             else
             {
-            <div id="badge2">
-                @Html.Partial("tableDanger")
-                <div id="badge" class="badge badge-success">
+                <div id="badge2">
+                    @Html.Partial("tableDanger")
+                    <div id="badge" class="badge badge-success">
 
-                    <h1 id="badge1">@ViewBag.DailyTemp</h1>
+                        <h1 id="badge1">@ViewBag.DailyTemp</h1>
+                    </div>
                 </div>
-            </div>
+                <div id="btnChart">
+                    <a target="_blank" href="@Url.Content("~/ASPXpage/Chart.aspx")">
+                        <button>Chart</button>
+                    </a>
 
-
+                </div>
             }
 
         </div>
+    }
+</div>
 
+</body>
+</html>
 
-
-            <div id="chartContainer">
-
-
-                @*@ @Html.Partial("dailyTemp")*@
-            </div>
-
-
-            // @Html.Partial("dailyTemp")
-
-            <script>
-
-                // setInterval(updateTable, 100);
-
-                function update() {
-                    $("#badge2").load(" #badge2");
-                    // changed();
-                };
-                function updateMain() {
-                    $(".WholePage").load(" .WholePage");
-                    // changed();
-                };
-                setInterval(updateMain, 100);
-                setInterval(update, 1000);
-                //setInterval(updateTable, 100);
-                //at some point needs to be changed
-                /*function changed() {
-                    x = document.getElementById("badge1");
-                    x.className = "badge1";
-                   setInterval(changedBack, 2000);
-                };
-
-                function changedBack() {
-                    x = document.getElementById("badge1");
-                    x.className = "badge";
-                };
-                */
-
-
-            </script>
-            }
-        </div>
-
-        </body>
-    </html>
-
+@section Scripts {
+    @Scripts.Render("~/Content/JavaScript")
+}

@@ -1,19 +1,18 @@
 ﻿.loginHeader {
-    position: absolute;
-    margin: 0px;
     float: left;
+    margin: 0px;
+    position: absolute;
     right: 45%;
 }
 
 
 .uNametxt {
+    float: left;
+    left: 300px;
+    margin-top: 0px;
     position: absolute;
     right: 30%;
     top: 25%;
-    margin-top: 0px;
-    left: 300px;
-    float: left;
-
 }
 
 .lblUname {
@@ -23,93 +22,86 @@
 }
 
 .lblPass {
-    position: relative;
-    margin-top: 25px;
-    top: 44%;
     float: left;
-    left: 390px;/*455*/
-   
+    left: 390px; /*455*/
+    margin-top: 25px;
+    position: relative;
+    top: 44%;   
 }
 
 .txtPass {
+    float: left;
+    margin-top: 26px;
     position: absolute;
     right: 29.9%; /*19.9*/
     top: 35%;
-    margin-top: 26px;
     width: 285px;
-    float: left;
 }
 
 .divbtnLogin {
-    position: absolute;
-    display: flex;
     align-items: center;
-    right: 52.5%;
+    display: flex;
     justify-content: center;
-    top: 50%;
     margin-top: 1%;
+    position: absolute;
+    right: 52.5%;
+    top: 50%;
 }
 
 .chartClass {
-    position: relative;
     float: left;
-    width: 20%;
     left: 13%;
     margin: 0px;
     padding: 0px;
-    
+    position: relative;
+    width: 20%;    
 }
-.form-horizontal 
-{
-    margin-top: 60px;
-}
+
+.form-horizontal { margin-top: 60px; }
 
 .badge {
     
-    top: 50%;
-    left: 54%;
-    width:20em;
-    height:8em;
-    margin-top: 9em; /*set to a negative number 1/2 of your height*/
-    margin-left: -15em; /*set to a negative number 1/2 of your width*/
-    border: 1px solid #ccc;
     background-color: #f3f3f3;
-    position:absolute;
-}
-.userLoggedIn {
-    top: 50%;
-    left: 35%;
-    width: 30%;
+    border: 1px solid #ccc;
     height: 8em;
+    left: 54%;
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+    margin-top: 9em; /*set to a negative number 1/2 of your height*/
+    position: absolute;
+    top: 50%;
+    width: 20em;
+}
+
+.userLoggedIn {
+    height: 8em;
+    left: 35%;
     position: relative;
     text-align: center;
+    top: 50%;
+    width: 30%;
 }
+
 .badgeDeviceOff {
     animation: blinker 6s linear infinite;
     color: red;
 }
+
 @-moz-keyframes blinker {
-    from {
-        text-shadow: 5px 5px 9px #ff0000;
-    }
-    to {
-        text-shadow: none;
-    }
+    from { text-shadow: 5px 5px 9px #ff0000; }
+
+    to { text-shadow: none; }
 }
 
 @-webkit-keyframes blinker {
-    from { text-shadow: 3px 3px 5px #ff0000;}
-    to{ text-shadow: none;}
+    from { text-shadow: 3px 3px 5px #ff0000; }
+
+    to { text-shadow: none; }
 }
 
 @keyframes blinker {
-    50% {
-        opacity: 0;
-    }
-    from {
-        text-shadow: 3px 3px 5px #ff0000;
-    }
-    to {
-        text-shadow: none;
-    }
+    50% { opacity: 0; }
+
+    from { text-shadow: 3px 3px 5px #ff0000; }
+
+    to { text-shadow: none; }
 }

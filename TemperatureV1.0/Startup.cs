@@ -1,14 +1,15 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using TemperatureV1._0;
 
-[assembly: OwinStartupAttribute(typeof(TemperatureV1._0.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
+
 namespace TemperatureV1._0
 {
-    public partial class Startup
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/custom.css")
     @Scripts.Render("~/bundles/modernizr")
@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <meta name="description" content="Show the temperature live and alerts when temperature is out of normal parameters. Also, shows a graph that indicates the average of temperature within one month."/>
 </head>
 <body>
 @if (Session["UserID"] == null)
@@ -18,11 +19,11 @@
     <div class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                
+
                 <a class="navbar-brand" href=@Url.Action("Login", "Customer")>MoneyHeat</a>
             </div>
             <ul class="nav navbar-nav">
-               @* <li ">@Html.ActionLink("Login", "Login", "Customer")</li>*@
+                @* <li ">@Html.ActionLink("Login", "Login", "Customer")</li>*@
 
 
                 <li>@Html.ActionLink("Register", "Register", "Customer")</li>
@@ -86,6 +87,6 @@ else
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+@RenderSection("scripts", false)
 </body>
 </html>

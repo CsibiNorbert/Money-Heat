@@ -1,51 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web.Helpers;
-using System.Web.Mvc;
-using TemperatureV1._0.Models;
-using MySql.Data.MySqlClient;
 using System.Data;
 using System.IO.Ports;
+using System.Linq;
 using System.Threading;
-using System.Web.Services.Description;
-
+using System.Web.Helpers;
+using System.Web.Mvc;
+using MySql.Data.MySqlClient;
+using TemperatureV1._0.Models;
 
 namespace TemperatureV1._0.Controllers
 {
     public class CustomerController : Controller
     {
+        private MySqlDataAdapter adp = new MySqlDataAdapter();
+
+        private MySqlCommand cmd = new MySqlCommand();
+
         //MySqlConnection connection = new MySqlConnection();
         //private string strConnString = ConfigurationManager.ConnectionStrings["MySqlTemperature"].ConnectionString;
-        MySqlConnection connection = new MySqlConnection("server=localhost;user id=root;database=customer;password=Clujnapoca2019;Convert Zero Datetime=true;");
-        private MySqlCommand cmd = new MySqlCommand();
-        MySqlDataAdapter adp = new MySqlDataAdapter();
-        private DataSet ds = new DataSet();
-        private string[] ports = SerialPort.GetPortNames();
+        private readonly MySqlConnection connection = new MySqlConnection(
+            "server=localhost;user id=root;database=customer;password=Clujnapoca2019;Convert Zero Datetime=true;");
+
+        private readonly List<DateTime> dateList = new List<DateTime>();
+        private readonly DataSet ds = new DataSet();
+
+        private readonly List<string> intList = new List<string>();
         private string portAvailable;
+        private readonly string[] ports = SerialPort.GetPortNames();
 
 
+        private bool x8;
 
-        private Boolean x8;
-        public  ActionResult Register()
+        public ActionResult Register()
         {
             return View();
         }
 
-        
-       
 
         [HttpPost]
         public ActionResult Register(Customer account)
         {
-
-            
-            string registerUser = "INSERT INTO user (FName,LName,Email,Username,City,Password) VALUES ('" + account.FName + "','" + account.LName + "','" + account.Email + "','" + account.Username + "','" + account.City + "','" + account.Password + "')";
+            var registerUser = "INSERT INTO user (FName,LName,Email,Username,City,Password) VALUES ('" + account.FName +
+                               "','" + account.LName + "','" + account.Email + "','" + account.Username + "','" +
+                               account.City + "','" + account.Password + "')";
             //MySqlConnection connection1 = new MySqlConnection();
             connection.Open();
             cmd = new MySqlCommand(registerUser, connection);
             adp = new MySqlDataAdapter(cmd);
-            
+
             adp.Fill(ds);
 
             connection.Close();
@@ -80,80 +83,59 @@ namespace TemperatureV1._0.Controllers
         public ActionResult Login(Customer userLoggin)
         {
             connection.Open();
-            
-            using (DbMyContext db = new DbMyContext())
-            {
 
-                string retrieveUserForLoggin = userLoggin.Username.ToString();
+            using (var db = new DbMyContext())
+            {
+                var retrieveUserForLoggin = userLoggin.Username;
 
                 //var usr = db.customer.Where(u=> retrieveUserForLoggin == userLoggin.Username).FirstOrDefault();
                 //var usrPSW = db.customer.Where(u=> u.Password == userLoggin.Password).FirstOrDefault();
 
-                string retrieveUser = "SELECT * FROM user WHERE Username='"+ userLoggin.Username.ToString() +"';";
+                var retrieveUser = "SELECT * FROM user WHERE Username='" + userLoggin.Username + "';";
                 cmd = new MySqlCommand(retrieveUser, connection);
-                MySqlDataReader mdr = cmd.ExecuteReader();
-                if (mdr.Read() !=false)
+                var mdr = cmd.ExecuteReader();
+                if (mdr.Read())
                 {
                     Session["UserID"] = mdr.GetString("idUser");
-                        //usr.Id.ToString();
+                    //usr.Id.ToString();
                     Session["Username"] = mdr.GetString("Username");
                     //usr.Username.ToString();
                     mdr.Close();
                     return RedirectToAction("Loggedin");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Check your credentials");
-                }
+
+                ModelState.AddModelError("", "Check your credentials");
                 return View();
             }
-                
         }
 
-        private int i = 0;
-        List<string> intList = new List<string>();
-        List<DateTime> dateList = new List<DateTime>();
-        private Boolean serialPortFlag = false;
-        
         public ActionResult Loggedin()
         {
-           
-
-            if (Session["UserID"] != null )
+            if (Session["UserID"] != null)
             {
-               
-
                 // database
-                string retrieveUsername = Session["Username"].ToString();
-                string retrieveUserId = Session["UserID"].ToString();
-                for (int j = 0; j < ports.Length; j++)
+                var retrieveUsername = Session["Username"].ToString();
+                var retrieveUserId = Session["UserID"].ToString();
+                for (var j = 0; j < ports.Length; j++)
                 {
-                    if (SerialPort.GetPortNames().Any(x => x == ports[j]))
-                    {
-                        portAvailable = ports[j];
-                    }
+                    if (SerialPort.GetPortNames().Any(x => x == ports[j])) portAvailable = ports[j];
                     break;
                 }
-                SerialPort port = new SerialPort(portAvailable, 9600);
+
+                var port = new SerialPort(portAvailable, 9600);
                 x8 = SerialPort.GetPortNames().Any(x => x == portAvailable);
                 //THIS SHOULD BE CHANGED AND TESTED 
-                if (x8 != false)
+                if (x8)
                 {
                     port.Open();
-                    DateTime nowDateTime = DateTime.Now;
-                    string dateSubmitting = nowDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    var nowDateTime = DateTime.Now;
+                    var dateSubmitting = nowDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     port.WriteLine("connected"); //send to arduino
-                    string txt = port.ReadLine();
-                    if (dateSubmitting.Length>0)
-                    {
-                        dateSubmitting = dateSubmitting.Remove(dateSubmitting.Length - 13);
-                    }
-                    if (txt.Length > 5)
-                    {
-                        txt = txt.Remove(txt.Length - 1);
-                    }
+                    var txt = port.ReadLine();
+                    if (dateSubmitting.Length > 0) dateSubmitting = dateSubmitting.Remove(dateSubmitting.Length - 13);
+                    if (txt.Length > 5) txt = txt.Remove(txt.Length - 1);
 
-                    double x = double.Parse(txt);
+                    var x = double.Parse(txt);
 
                     ViewBag.DailyTemp = x;
 
@@ -167,53 +149,41 @@ namespace TemperatureV1._0.Controllers
                     ViewBag.DailyTempOff = "DEVICE OFF";
                 }
 
-                
 
                 connection.Open();
-                string retrieveUsernamev = Session["Username"].ToString();
+                var retrieveUsernamev = Session["Username"].ToString();
                 //string retrieveUsername = userLoggin.Username.ToString();
-                string retrieveUser = "SELECT * FROM temperature WHERE Username='" + retrieveUsernamev.ToString() + "';";
+                var retrieveUser = "SELECT * FROM temperature WHERE Username='" + retrieveUsernamev + "';";
                 string x1 = null;
                 string tempDates;
                 DateTime dates;
                 try
                 {
-
                     cmd = new MySqlCommand(retrieveUser, connection);
-                   
+
                     //MySqlDataReader mdr = cmd.ExecuteReader();
-                    DataTable ds = new DataTable();
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(retrieveUser, connection);
-                   
-                   
-                   
+                    var ds = new DataTable();
+                    var adapter = new MySqlDataAdapter(retrieveUser, connection);
+
+
                     adapter.Fill(ds);
-                   
+
                     foreach (DataRow row in ds.Rows)
                     {
-                         x1 = row["Temperature"].ToString();
-                       
+                        x1 = row["Temperature"].ToString();
+
                         DateTime.TryParse(row["dateTemp"].ToString(), out dates);
-                        
+
                         intList.Add(x1);
-                        tempDates = dates.ToString("Y").ToString();
+                        tempDates = dates.ToString("Y");
                         dateList.Add(Convert.ToDateTime(tempDates));
-                      
                     }
+
                     adapter.Dispose();
 
 
-
-                   
                     ViewBag.Temperatures = intList;
 
-
-
-
-
-
-
-                  
 
                     port.Dispose();
                 }
@@ -222,16 +192,12 @@ namespace TemperatureV1._0.Controllers
                     Console.WriteLine(e);
                     throw;
                 }
-                
-                
-                
+
+
                 return View();
-                
             }
-            else
-            {
-                return RedirectToAction("Login");
-            }
+
+            return RedirectToAction("Login");
         }
 
         public ActionResult Logoff()
@@ -241,101 +207,84 @@ namespace TemperatureV1._0.Controllers
                 Session.Abandon();
                 return RedirectToAction("Login");
             }
+
             return View();
         }
+
         public ActionResult tableDanger()
         {
             if (Session["UserID"] != null)
-            {//test it
-                if (x8 != false)
+                if (x8)
                 {
-                    SerialPort port = new SerialPort(portAvailable, 9600);
+                    var port = new SerialPort(portAvailable, 9600);
                     port.Open();
                     port.WriteLine("connected"); //send to arduino
-                    string txt = port.ReadLine();
+                    var txt = port.ReadLine();
 
-                    if (txt.Length > 5)
-                    {
-                        txt = txt.Remove(txt.Length - 1);
-                    }
+                    if (txt.Length > 5) txt = txt.Remove(txt.Length - 1);
 
-                    double x = double.Parse(txt);
+                    var x = double.Parse(txt);
                     ViewBag.DailyTemp = x;
                 }
 
-
-                //ViewBag.DailyTemp = "DEVICE OFF";
-
-
-            }
             return View();
         }
+
         public ActionResult myChart()
         {
-           
-           
-
-            SerialPort port = new SerialPort(portAvailable, 9600);
+            var port = new SerialPort(portAvailable, 9600);
             port.Open();
             port.WriteLine("connected"); //send to arduino
-            string txt = port.ReadLine();
-           
-            if (txt.Length > 5)
-            {
-                txt = txt.Remove(txt.Length - 1);
-            }
+            var txt = port.ReadLine();
 
-            double x = double.Parse(txt);
-            
+            if (txt.Length > 5) txt = txt.Remove(txt.Length - 1);
+
+            var x = double.Parse(txt);
+
             port.Dispose();
 
-            new System.Web.Helpers.Chart(width: 800, height: 200, theme: ChartTheme.Green)
+            new System.Web.Helpers.Chart(800, 200, ChartTheme.Green)
                 .AddTitle("Temperature")
                 .AddSeries(
-                    name:"Month",
-                    chartType: "column",
-                    xValue: new[] { "Jan", "Feb", "Mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec" },
+                    "Month",
+                    "column",
+                    xValue: new[] {"Jan", "Feb", "Mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"},
                     yValues: new[] {x}).Write("png");
             return View();
         }
-       
-       public ActionResult dailyTemp()
-        {
-            
 
-            SerialPort port = new SerialPort(portAvailable, 9600);
+        public ActionResult dailyTemp()
+        {
+            var port = new SerialPort(portAvailable, 9600);
             port.Open();
             port.WriteLine("connected"); //send to arduino
-            string txt = port.ReadLine();
+            var txt = port.ReadLine();
 
-            if (txt.Length > 5)
-            {
-                txt = txt.Remove(txt.Length - 1);
-            }
-            
+            if (txt.Length > 5) txt = txt.Remove(txt.Length - 1);
 
-            System.Web.Helpers.Chart mych = new System.Web.Helpers.Chart(width: 800, height: 200, theme: ChartTheme.Green);
-            double x = double.Parse(txt);
+
+            var mych = new System.Web.Helpers.Chart(800, 200, ChartTheme.Green);
+            var x = double.Parse(txt);
             port.Dispose();
 
             mych.AddTitle("Temperature")
                 .AddSeries(
-                    name: "Daily",
-                    chartType: "column",
-                    xValue: new[] { "Today"},
-                    yValues: new[] { x }).Write("png");
+                    "Daily",
+                    "column",
+                    xValue: new[] {"Today"},
+                    yValues: new[] {x}).Write("png");
             ViewData["gauge"] = txt;
             //kayChart serialData = new kayChart(mych,60);
             return View();
         }
-        
-        public void insertToDbTemperature(double x,string date)
+
+        public void insertToDbTemperature(double x, string date)
         {
             connection.Open();
-            string retrieveUsername = Session["Username"].ToString();
-            string retrieveUserId = Session["UserID"].ToString();
-            string registerTemp = "INSERT INTO temperature (idTemperature,temperature,Username,dateTemp) VALUES ('" +
-                                  retrieveUserId + "','" + x + "','" + retrieveUsername + "','" + date + "')";
+            var retrieveUsername = Session["Username"].ToString();
+            var retrieveUserId = Session["UserID"].ToString();
+            var registerTemp = "INSERT INTO temperature (idTemperature,temperature,Username,dateTemp) VALUES ('" +
+                               retrieveUserId + "','" + x + "','" + retrieveUsername + "','" + date + "')";
 
             cmd = new MySqlCommand(registerTemp, connection);
             adp = new MySqlDataAdapter(cmd);
@@ -344,9 +293,6 @@ namespace TemperatureV1._0.Controllers
             connection.Close();
             cmd.Dispose();
             Thread.Sleep(10000);
-            
-
         }
-
     }
 }
