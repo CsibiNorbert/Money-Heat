@@ -1,0 +1,63 @@
+﻿@using System.Threading
+<div id="table">
+    <table class="table table-responsive table-hover">  
+        <thead class="thead-dark">  
+            <th>Temperature </th>  
+            <th>Danger </th>  
+                        
+        </thead>  
+                    
+        
+        @if ((@ViewBag.DailyTemp > 24))
+        {
+            <div id="alert" class="alert alert-danger">
+                <strong>Temperature Danger!</strong> The temperature is to <strong>HIGH</strong>
+                <p>> 24&#8451; - Cardiovascular risk</p>
+            </div>
+
+        }
+        else if (@ViewBag.DailyTemp <= 18)
+        {
+            <div class="alert alert-info">
+                <strong>Temperature Comfort!</strong> The temperature is comfortable <strong>HIGH</strong>
+                
+            </div>
+        }else if(@ViewBag.DailyTemp <= 18 && @ViewBag.DailyTemp >=16)
+        {
+        <div class="alert alert-warning">
+            <strong>Temperature Warning!</strong> The temperature is to  <strong>LOW</strong>
+            <p>> 24&#8451; - Respiratory risk</p>
+        </div>
+        }
+
+            @if (@ViewBag.DailyTemp > 24)
+            {
+                var x = @ViewBag.DailyTemp;
+               
+                   <tbody>
+                   <tr class="table-danger">
+                       <td>@x.ToString()</td>
+                       <td>HIGH</td>
+
+                   </tr>
+                   </tbody>
+           
+            
+            }
+                    
+        
+                        
+                      
+    </table> 
+</div>
+
+<script>
+    function x() {
+        $("#alert").fadeOut("slow").delay(15500).hide(0);
+    };
+    
+    function updateTable() {
+        $("#table").load(" #table");
+    };
+    setInterval(x, 10000);
+</script>

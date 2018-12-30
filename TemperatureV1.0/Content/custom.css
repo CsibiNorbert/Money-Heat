@@ -1,0 +1,115 @@
+﻿.loginHeader {
+    position: absolute;
+    margin: 0px;
+    float: left;
+    right: 45%;
+}
+
+
+.uNametxt {
+    position: absolute;
+    right: 30%;
+    top: 25%;
+    margin-top: 0px;
+    left: 300px;
+    float: left;
+
+}
+
+.lblUname {
+    position: relative;
+    right: -25%;
+    top: 27.6%;
+}
+
+.lblPass {
+    position: relative;
+    margin-top: 25px;
+    top: 44%;
+    float: left;
+    left: 390px;/*455*/
+   
+}
+
+.txtPass {
+    position: absolute;
+    right: 29.9%; /*19.9*/
+    top: 35%;
+    margin-top: 26px;
+    width: 285px;
+    float: left;
+}
+
+.divbtnLogin {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    right: 52.5%;
+    justify-content: center;
+    top: 50%;
+    margin-top: 1%;
+}
+
+.chartClass {
+    position: relative;
+    float: left;
+    width: 20%;
+    left: 13%;
+    margin: 0px;
+    padding: 0px;
+    
+}
+.form-horizontal 
+{
+    margin-top: 60px;
+}
+
+.badge {
+    
+    top: 50%;
+    left: 54%;
+    width:20em;
+    height:8em;
+    margin-top: 9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    position:absolute;
+}
+.userLoggedIn {
+    top: 50%;
+    left: 35%;
+    width: 30%;
+    height: 8em;
+    position: relative;
+    text-align: center;
+}
+.badgeDeviceOff {
+    animation: blinker 6s linear infinite;
+    color: red;
+}
+@-moz-keyframes blinker {
+    from {
+        text-shadow: 5px 5px 9px #ff0000;
+    }
+    to {
+        text-shadow: none;
+    }
+}
+
+@-webkit-keyframes blinker {
+    from { text-shadow: 3px 3px 5px #ff0000;}
+    to{ text-shadow: none;}
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+    from {
+        text-shadow: 3px 3px 5px #ff0000;
+    }
+    to {
+        text-shadow: none;
+    }
+}
