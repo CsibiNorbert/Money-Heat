@@ -27,7 +27,7 @@ namespace TemperatureV1._0.Controllers
 
         private readonly List<string> intList = new List<string>();
         private string portAvailable;
-        private readonly string[] ports = SerialPort.GetPortNames();
+        //private readonly string[] ports = SerialPort.GetPortNames();
 
 
         private bool x8;
@@ -116,38 +116,49 @@ namespace TemperatureV1._0.Controllers
                 // database
                 var retrieveUsername = Session["Username"].ToString();
                 var retrieveUserId = Session["UserID"].ToString();
+                string[] ports = SerialPort.GetPortNames();
                 for (var j = 0; j < ports.Length; j++)
                 {
                     if (SerialPort.GetPortNames().Any(x => x == ports[j])) portAvailable = ports[j];
                     break;
                 }
 
-                var port = new SerialPort(portAvailable, 9600);
-                x8 = SerialPort.GetPortNames().Any(x => x == portAvailable);
-                //THIS SHOULD BE CHANGED AND TESTED 
-                if (x8)
-                {
-                    port.Open();
-                    var nowDateTime = DateTime.Now;
-                    var dateSubmitting = nowDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
-                    port.WriteLine("connected"); //send to arduino
-                    var txt = port.ReadLine();
-                    if (dateSubmitting.Length > 0) dateSubmitting = dateSubmitting.Remove(dateSubmitting.Length - 13);
-                    if (txt.Length > 5) txt = txt.Remove(txt.Length - 1);
-
-                    var x = double.Parse(txt);
-
-                    ViewBag.DailyTemp = x;
-
-
-                    insertToDbTemperature(x, dateSubmitting);
-                    port.Close();
-                }
-                else
+                if (portAvailable == null)
                 {
                     ViewBag.DeviceOff = false;
                     ViewBag.DailyTempOff = "DEVICE OFF";
                 }
+                else
+                {
+                    var port = new SerialPort(portAvailable, 9600);
+                    x8 = SerialPort.GetPortNames().Any(x => x == portAvailable);
+                    //THIS SHOULD BE CHANGED AND TESTED 
+                    if (x8)
+                    {
+                        port.Open();
+                        var nowDateTime = DateTime.Now;
+                        var dateSubmitting = nowDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                        port.WriteLine("connected"); //send to arduino
+                        var txt = port.ReadLine();
+                        if (dateSubmitting.Length > 0) dateSubmitting = dateSubmitting.Remove(dateSubmitting.Length - 13);
+                        if (txt.Length > 5) txt = txt.Remove(txt.Length - 1);
+
+                        var x = double.Parse(txt);
+
+                        ViewBag.DailyTemp = x;
+
+
+                        insertToDbTemperature(x, dateSubmitting);
+                        port.Dispose();
+                        port.Close();
+                    }
+                    else
+                    {
+                        ViewBag.DeviceOff = false;
+                        ViewBag.DailyTempOff = "DEVICE OFF";
+                    }
+                }
+                
 
 
                 connection.Open();
@@ -185,7 +196,7 @@ namespace TemperatureV1._0.Controllers
                     ViewBag.Temperatures = intList;
 
 
-                    port.Dispose();
+                    
                 }
                 catch (Exception e)
                 {
