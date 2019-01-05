@@ -68,7 +68,7 @@
     margin-left: -15em; /*set to a negative number 1/2 of your width*/
     margin-top: 9em; /*set to a negative number 1/2 of your height*/
     position: absolute;
-    top: 50%;
+    top: 20%;
     width: 20em;
 }
 
@@ -108,8 +108,41 @@
 .wrapper {
     margin:0 auto;
     width:660px;
-    
+    height: 380px;
     position:absolute;
-    overflow: hidden;
+    /*overflow: hidden;*/
     
+}
+
+/*testin purpose*/
+.row{
+    margin-top:40px;
+    padding: 0 10px;
+}
+
+.clickable{
+    cursor: pointer;   
+}
+
+.panel-heading span {
+    margin-top: -20px;
+    font-size: 15px;
+}
+.panel {
+    width: 300px;
+}
+.col-sm-2 {
+    left: -110px !important;
+    text-shadow: 3px 1px 19px #b5a6a6;
+    background-color: white;
+}
+.panel-body {
+    padding: 15px;
+    background: linear-gradient(to bottom, #ffff99  0%, #ff9933  100%);
+}
+
+.panel-primary>.panel-heading {
+    color: #fff;
+    background-color:  rgb(26, 26, 26) !important; 
+    border-color: #337ab7;
 }

@@ -228,49 +228,13 @@ namespace TemperatureV1._0.Controllers
 
         public ActionResult myChart()
         {
-            var port = new SerialPort(portAvailable, 9600);
-            port.Open();
-            port.WriteLine("connected"); //send to arduino
-            var txt = port.ReadLine();
-
-            if (txt.Length > 5) txt = txt.Remove(txt.Length - 1);
-
-            var x = double.Parse(txt);
-
-            port.Dispose();
-
-            new System.Web.Helpers.Chart(800, 200, ChartTheme.Green)
-                .AddTitle("Temperature")
-                .AddSeries(
-                    "Month",
-                    "column",
-                    xValue: new[] {"Jan", "Feb", "Mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"},
-                    yValues: new[] {x}).Write("png");
+            ViewBag.TestChartJS = 1;
             return View();
         }
 
-        public ActionResult dailyTemp()
+        public ActionResult ourProject()
         {
-            var port = new SerialPort(portAvailable, 9600);
-            port.Open();
-            port.WriteLine("connected"); //send to arduino
-            var txt = port.ReadLine();
-
-            if (txt.Length > 5) txt = txt.Remove(txt.Length - 1);
-
-
-            var mych = new System.Web.Helpers.Chart(800, 200, ChartTheme.Green);
-            var x = double.Parse(txt);
-            port.Dispose();
-
-            mych.AddTitle("Temperature")
-                .AddSeries(
-                    "Daily",
-                    "column",
-                    xValue: new[] {"Today"},
-                    yValues: new[] {x}).Write("png");
-            ViewData["gauge"] = txt;
-            //kayChart serialData = new kayChart(mych,60);
+           
             return View();
         }
 

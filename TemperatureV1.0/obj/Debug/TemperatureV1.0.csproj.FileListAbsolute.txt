@@ -173,9 +173,9 @@ C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\Microsoft.CodeDom.Pro
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\MySql.Data.xml
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\Newtonsoft.Json.xml
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\ScriptCs.Arduino.pdb
+C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\System.Web.Optimization.xml
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\System.Web.Helpers.xml
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\System.Web.Mvc.xml
-C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\System.Web.Optimization.xml
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\System.Web.Razor.xml
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\System.Web.WebPages.xml
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\System.Web.WebPages.Deployment.xml
@@ -195,4 +195,3 @@ C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\Microsoft.Owin.Securi
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\obj\Debug\TemperatureV1.0.dll
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\obj\Debug\TemperatureV1.0.pdb
-C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\obj\Debug\TemperatureV1.0.csprojResolveAssemblyReference.cache

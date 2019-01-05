@@ -3,55 +3,81 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts {
+    @Scripts.Render("~/Content/JavaScript")
+    @Scripts.Render("~/Content/css")
+}
+
+
+
+
 <html>
 <head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <div class="lol">
 
     @if (Session["UserID"] != null)
     {
-        <div class="userLoggedIn">
-            <h2> @Session["Username"].ToString()</h2>
-        </div>
-        <div class="wrapper">
-            @if (ViewBag.DeviceOff == false)
-            {
-                <div id="badge2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="userLoggedIn">
+                    <h2> @Session["Username"].ToString()</h2>
+                </div>
+                <div class="col-sm-10">
+                    <div class="wrapper">
+                        @if (ViewBag.DeviceOff == false)
+                        {
+                            <div id="badge2">
 
-                    <div id="badge" class="badge badge-success">
+                                <div id="badge" class="badge badge-success">
 
-                        <h1 id="badge1" class="badgeDeviceOff">@ViewBag.DailyTempOff</h1>
+                                    <h1 id="badge1" class="badgeDeviceOff">@ViewBag.DailyTempOff</h1>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="badge2">
+                                <div class="wrapper">@Html.Partial("tableDanger")</div>
+
+                                <div id="badge" class="badge badge-success">
+
+                                    <h1 id="badge1">@ViewBag.DailyTemp</h1>
+                                </div>
+                            </div>
+
+                            <div id="btnChart">
+                                <a target="_blank" href="@Url.Content("~/ASPXpage/Chart.aspx")">
+                                    <button>Chart</button>
+                                </a>
+
+                            </div>
+                            
+                        }
                     </div>
                 </div>
-            }
-            else
-            {
-                <div id="badge2">
-                    <div class="wrapper">@Html.Partial("tableDanger")</div>
-                   
-                    <div id="badge" class="badge badge-success">
-
-                        <h1 id="badge1">@ViewBag.DailyTemp</h1>
+                <div class="clearfix visible-xs"></div>
+                <div class="col-sm-2">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Comfort temperature levels</h3>
+                            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                <li>24&#8451; - Cardiovascular risk <br/> - Heart Failure <br/>- Ischemic Heart Disease<br/><span class="conclusionDisease">Conclusion: Cardiovascular Events Mortality</span> </li>
+                                <li>24&#8451; - 18&#8451; - Comfort zone</li>
+                                <li>< 18&#8451; - Respiratory risk <br/>- asthma<br />- acute respiratory diseases<br/>- chronic obstructive pulmonary disease</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div id="btnChart">
-                    <a target="_blank" href="@Url.Content("~/ASPXpage/Chart.aspx")">
-                        <button>Chart</button>
-                    </a>
-
                 </div>
-            }
-
-        </div>
+            </div>
     }
 </div>
 
 </body>
 </html>
-
-@section Scripts {
-    @Scripts.Render("~/Content/JavaScript")
-    @Scripts.Render("~/Content/css")
-}

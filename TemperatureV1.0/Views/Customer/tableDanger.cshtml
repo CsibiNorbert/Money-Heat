@@ -14,18 +14,19 @@
                 <p>> 24&#8451; - Cardiovascular risk</p>
             </div>
         }
-        else if (ViewBag.DailyTemp <= 18)
-        {
-            <div class="alert alert-info">
-                <strong>Temperature Comfort!</strong> The temperature is comfortable <strong>HIGH</strong>
+        @* else if (ViewBag.DailyTemp <= 18)
+    {
+        <div class="alert alert-info">
+            <strong>Temperature Comfort!</strong> The temperature is comfortable <strong>HIGH</strong>
 
-            </div>
-        }
+        </div>
+    }*@
+
         else if (ViewBag.DailyTemp <= 18 && ViewBag.DailyTemp >= 16)
         {
             <div class="alert alert-warning">
                 <strong>Temperature Warning!</strong> The temperature is to <strong>LOW</strong>
-                <p>> 24&#8451; - Respiratory risk</p>
+                <p>> 18&#8451; - 16&#8451; - Respiratory risk</p>
             </div>
         }
 
@@ -46,4 +47,6 @@
 
 @section Scripts {
     @Scripts.Render("~/Content/JavaScript")
+   
 }
+
