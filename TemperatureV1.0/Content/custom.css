@@ -105,3 +105,11 @@
 
     to { text-shadow: none; }
 }
+.wrapper {
+    margin:0 auto;
+    width:660px;
+    
+    position:absolute;
+    overflow: hidden;
+    
+}

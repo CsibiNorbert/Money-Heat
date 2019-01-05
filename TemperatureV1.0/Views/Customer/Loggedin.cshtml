@@ -15,7 +15,7 @@
         <div class="userLoggedIn">
             <h2> @Session["Username"].ToString()</h2>
         </div>
-        <div class="WholePage">
+        <div class="wrapper">
             @if (ViewBag.DeviceOff == false)
             {
                 <div id="badge2">
@@ -29,7 +29,8 @@
             else
             {
                 <div id="badge2">
-                    @Html.Partial("tableDanger")
+                    <div class="wrapper">@Html.Partial("tableDanger")</div>
+                   
                     <div id="badge" class="badge badge-success">
 
                         <h1 id="badge1">@ViewBag.DailyTemp</h1>

@@ -323,7 +323,6 @@
     <Content Include="Views\Customer\Login.cshtml" />
     <Content Include="Views\Customer\Loggedin.cshtml" />
     <Content Include="Views\Customer\myChart.cshtml" />
-    <Content Include="Views\Customer\dailyTemp.cshtml" />
     <Content Include="Views\Customer\tableDanger.cshtml" />
   </ItemGroup>
   <ItemGroup>

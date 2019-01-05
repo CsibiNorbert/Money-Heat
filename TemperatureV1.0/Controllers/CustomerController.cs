@@ -54,21 +54,6 @@ namespace TemperatureV1._0.Controllers
             connection.Close();
             cmd.Dispose();
 
-
-            /* if (ModelState.IsValid)
-             {
-
-
-                 using (DbMyContext db = new DbMyContext())
-                 {
-
-                     db.customer.Add(account);
-                     db.SaveChanges();
-                 }
-                 //clear content of all input controls
-                 ModelState.Clear();
-                 
-             }*/
             ViewBag.message = account.FName + " " + account.LName + " successfully registered";
             return View();
         }
