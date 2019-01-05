@@ -2,15 +2,18 @@
 //Logged
 function update() {
     $("#badge2").load(" #badge2");
+    
+    
 
 };
+
 
 function updateMain() {
     $(".WholePage").load(" .WholePage");
 
 };
 
-setInterval(updateMain, 100);
+setInterval(updateMain, 2000);
 setInterval(update, 1000);
 
 //tabledanger

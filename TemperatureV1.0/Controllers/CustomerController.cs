@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO.Ports;
 using System.Linq;
 using System.Threading;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using TemperatureV1._0.Models;
 
@@ -94,8 +96,15 @@ namespace TemperatureV1._0.Controllers
             }
         }
 
+        private int[] temperaturesOfTheDay;
+        double maxTemp;
+       
+        static double x;
+        double minTemp = x;
         public ActionResult Loggedin()
         {
+            var nowDateTime = DateTime.Now;
+            var dateSubmitting = nowDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
             if (Session["UserID"] != null)
             {
                 // database
@@ -121,19 +130,20 @@ namespace TemperatureV1._0.Controllers
                     if (x8)
                     {
                         port.Open();
-                        var nowDateTime = DateTime.Now;
-                        var dateSubmitting = nowDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                        
                         port.WriteLine("connected"); //send to arduino
                         var txt = port.ReadLine();
                         if (dateSubmitting.Length > 0) dateSubmitting = dateSubmitting.Remove(dateSubmitting.Length - 13);
                         if (txt.Length > 5) txt = txt.Remove(txt.Length - 1);
 
-                        var x = double.Parse(txt);
-
+                        x = double.Parse(txt);
+                        
                         ViewBag.DailyTemp = x;
-
+                       
 
                         insertToDbTemperature(x, dateSubmitting);
+
+                    
                         port.Dispose();
                         port.Close();
                     }
@@ -166,7 +176,7 @@ namespace TemperatureV1._0.Controllers
 
                     foreach (DataRow row in ds.Rows)
                     {
-                        x1 = row["Temperature"].ToString();
+                        x1 = row["temperature"].ToString();
 
                         DateTime.TryParse(row["dateTemp"].ToString(), out dates);
 
@@ -176,12 +186,41 @@ namespace TemperatureV1._0.Controllers
                     }
 
                     adapter.Dispose();
-
-
-                    ViewBag.Temperatures = intList;
-
+                    cmd.Dispose();
+                    ds.Dispose();
 
                     
+                    var retrieveMaxTemp = "SELECT MAX(temperature) from temperature WHERE Username='" + retrieveUsernamev +
+                                          "' AND dateTemp='" + dateSubmitting + "';";
+                    var retrieveMinTemp = "SELECT MIN(temperature) from temperature WHERE Username='" + retrieveUsernamev +
+                                          "' AND dateTemp='" + dateSubmitting + "';";
+
+                    var dsO = new DataTable();
+                    var adapterO = new MySqlDataAdapter(retrieveMaxTemp, connection);
+                    adapterO.Fill(dsO);
+                    foreach (DataRow row in dsO.Rows)
+                    {
+                        maxTemp = Convert.ToDouble(row["MAX(temperature)"]);
+
+
+                    }
+                    dsO.Dispose();
+                    adapterO.Dispose();
+                    var dsM = new DataTable();
+                    var adapterM = new MySqlDataAdapter(retrieveMinTemp, connection);
+                    adapterM.Fill(dsM);
+                    foreach (DataRow row in dsM.Rows)
+                    {
+                        minTemp = Convert.ToDouble(row["MIN(temperature)"]);
+
+
+                    }
+                    ViewBag.Temperatures = intList;
+
+                    ViewBag.maxTemperature = maxTemp;
+                    ViewBag.minTemperature = minTemp;
+
+
                 }
                 catch (Exception e)
                 {
