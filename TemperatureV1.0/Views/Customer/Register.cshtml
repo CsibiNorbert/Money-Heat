@@ -1,4 +1,5 @@
-﻿@model TemperatureV1._0.Models.Customer
+﻿@using System.Threading
+@model TemperatureV1._0.Models.Customer
 
 @{
     ViewBag.Title = "Register";
@@ -11,24 +12,28 @@
      {
 
      
-    <div class="modal" id="mymodal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div style="background-color: green;" class="modal-header">
-                    <h3 class="modal-title">@ViewBag.message</h3>
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                </div>
+         <div class="modal" id="mymodal" tabindex="-1" role="dialog">
+             <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                     <div style="background-color: green;" class="modal-header">
+                         <h3 class="modal-title">@ViewBag.message</h3>
+                         <button type="button" onclick="closeModal()" class="close" data-dismiss="modal"><span>&times;</span></button>
+                     </div>
 
-                <div class="modal-body">
-                    <h3>You successfully registered!</h3>
-                </div>
+                     <div class="modal-body">
+                         <h3>You successfully registered!</h3>
+                     </div>
 
                
-            </div>
-        </div>
-    </div>
-        
+                 </div>
+             </div>
+         </div>
+        @*This is how we redicrect from view
+    Response.Redirect(Url.Action("Login","Customer"));
+        *@
          
+
+
      }
 
    

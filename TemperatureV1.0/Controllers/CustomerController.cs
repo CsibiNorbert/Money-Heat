@@ -6,6 +6,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Windows.Forms;
@@ -103,7 +104,7 @@ namespace TemperatureV1._0.Controllers
        
         static double x;
         double minTemp = x;
-        public ActionResult Loggedin()
+        public  ActionResult Loggedin()
         {
             var nowDateTime = DateTime.Now;
             var dateSubmitting = nowDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -328,7 +329,7 @@ namespace TemperatureV1._0.Controllers
             return View();
         }
 
-        public void insertToDbTemperature(double x, string date)
+        public  void insertToDbTemperature(double x, string date)
         {
             connection.Open();
             var retrieveUsername = Session["Username"].ToString();
@@ -342,6 +343,7 @@ namespace TemperatureV1._0.Controllers
             adp.Fill(ds);
             connection.Close();
             cmd.Dispose();
+            //await Task.Delay(60000);
             Thread.Sleep(10000);
         }
     }
