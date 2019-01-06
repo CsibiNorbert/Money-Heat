@@ -56,7 +56,7 @@ namespace TemperatureV1._0.Controllers
             connection.Close();
             cmd.Dispose();
 
-            ViewBag.message = account.FName + " " + account.LName + " successfully registered";
+            ViewBag.message = account.FName + " " + account.LName;
             return View();
         }
 

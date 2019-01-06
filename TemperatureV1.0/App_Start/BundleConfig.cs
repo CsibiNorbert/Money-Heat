@@ -26,7 +26,7 @@ namespace TemperatureV1._0
                 "~/Content/bootstrap.css",
                 "~/Content/site.css",
                 "~/Content/custom.css"));
-            bundles.Add(new StyleBundle("~/Content/JavaScript").Include(
+            bundles.Add(new ScriptBundle("~/Content/JavaScript").Include(
                 "~/Content/JavaScript.js"));
         }
     }

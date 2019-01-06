@@ -6,8 +6,6 @@ function update() {
     
 
 };
-
-
 function updateMain() {
     $(".WholePage").load(" .WholePage");
 
