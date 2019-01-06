@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO.Ports;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -143,7 +144,52 @@ namespace TemperatureV1._0.Controllers
 
                         insertToDbTemperature(x, dateSubmitting);
 
-                    
+                        //sending SMS to user when temperature is low or high
+                        string phoneNumber = "447460456997";
+                        string txtMessage = "";
+                        string txtUsername = "csibi.norbert@study.beds.ac.uk";
+                        string txtPassword = "7qc14";
+                        using (System.Net.WebClient client = new WebClient())
+                        {
+                            try
+                            {//This needs to be changed when the resistor is applied
+                                if (x >94)
+                                {
+                                    txtMessage = "Warning! Temperature too High. Please reduce the temperature in you house. Too much waste of Energy." +
+                                                 "Regards," +
+                                                 "MoneyHeat Team";
+                                    string url = "http://smsc.vianett.no/v3/send.ashx?" + "src=" + phoneNumber + "&" + "dst=" + phoneNumber + "&" +
+                                                 "msg=" + System.Web.HttpUtility.UrlEncode(txtMessage, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" + "username=" + System.Web.HttpUtility.UrlEncode(txtUsername) + "&" + "password=" + System.Web.HttpUtility.UrlEncode(txtPassword);
+
+                                    string result = client.DownloadString(url);
+                                    if (result.Contains("OK"))
+                                    {
+
+                                    }
+                                }else if (x < 0)
+                                {
+                                    txtMessage = "Warning! Temperature too Low. Your house will be cold." +
+                                                 "Regards," +
+                                                 "MoneyHeat Team";
+                                    string url = "http://smsc.vianett.no/v3/send.ashx?" + "src=" + phoneNumber + "&" + "dst=" + phoneNumber + "&" +
+                                                 "msg=" + System.Web.HttpUtility.UrlEncode(txtMessage, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" + "username=" + System.Web.HttpUtility.UrlEncode(txtUsername) + "&" + "password=" + System.Web.HttpUtility.UrlEncode(txtPassword);
+
+                                    string result = client.DownloadString(url);
+                                    if (result.Contains("OK"))
+                                    {
+
+                                    }
+                                }
+                                
+
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                                throw;
+                            }
+                        }
+
                         port.Dispose();
                         port.Close();
                     }
@@ -219,6 +265,7 @@ namespace TemperatureV1._0.Controllers
 
                     ViewBag.maxTemperature = maxTemp;
                     ViewBag.minTemperature = minTemp;
+                    
 
 
                 }
