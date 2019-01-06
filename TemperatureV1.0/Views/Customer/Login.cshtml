@@ -4,6 +4,7 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Scripts.Render("~/Content/css")
 <div class="loginHeader">
     <h2>Login</h2>
 </div>
@@ -20,7 +21,7 @@
 
 
         <div class="form-group">
-            <div class="lblUname">@Html.LabelFor(model => model.Username, new {@class = "control-label col-md-2"})</div>
+            <div class="LblUname">@Html.LabelFor(model => model.Username, new { @class = "control-label col-md-2 testName", style = "right:-25%!important;" })</div>
 
             <div class="col-md-10">
                 <div class="uNametxt">
@@ -64,4 +65,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
 }

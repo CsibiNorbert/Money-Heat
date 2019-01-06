@@ -2,12 +2,13 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm", @class = "navbar-right"}))
     {
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 0px!important;">
             <li class="active">
                 @*maybe here we can add some manage account*@
-                @Html.ActionLink("Hello " + Session["Username"] + "!", "Index", "Customer", null, new {title = "Manage"})
+                @Html.ActionLink("Hello " + Session["Username"] + "!", "Loggedin", "Customer", null, new {title = "Manage"})
             </li>
             <li>@Html.ActionLink("Log out", "logoff", "Customer")</li>
+            
         </ul>
     }
 }

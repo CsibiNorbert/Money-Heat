@@ -195,4 +195,3 @@ C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\Microsoft.Owin.Securi
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\obj\Debug\TemperatureV1.0.dll
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\obj\Debug\TemperatureV1.0.pdb
-C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\obj\Debug\TemperatureV1.0.csprojResolveAssemblyReference.cache
