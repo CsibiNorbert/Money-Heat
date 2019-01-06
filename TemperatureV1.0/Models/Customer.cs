@@ -9,6 +9,7 @@ namespace TemperatureV1._0.Models
         //Here we add the validation
         [Required(ErrorMessage = "First Name is required.")]
         public string FName { get; set; }
+       
 
         [Required(ErrorMessage = "Last Name is required.")]
         public string LName { get; set; }
@@ -17,6 +18,8 @@ namespace TemperatureV1._0.Models
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Enter a valid email")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Phone number required.")]
+        public string phoneNumber { get; set; }
         public string City { get; set; }
 
         [Required(ErrorMessage = "Username is required.")]

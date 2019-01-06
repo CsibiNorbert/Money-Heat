@@ -44,9 +44,9 @@ namespace TemperatureV1._0.Controllers
         [HttpPost]
         public ActionResult Register(Customer account)
         {
-            var registerUser = "INSERT INTO user (FName,LName,Email,Username,City,Password) VALUES ('" + account.FName +
+            var registerUser = "INSERT INTO user (FName,LName,Email,Username,City,Password,phoneNum) VALUES ('" + account.FName +
                                "','" + account.LName + "','" + account.Email + "','" + account.Username + "','" +
-                               account.City + "','" + account.Password + "')";
+                               account.City + "','" + account.Password +  "','"+ account.phoneNumber +"')";
             //MySqlConnection connection1 = new MySqlConnection();
             connection.Open();
             cmd = new MySqlCommand(registerUser, connection);
@@ -88,6 +88,7 @@ namespace TemperatureV1._0.Controllers
                     //usr.Id.ToString();
                     Session["Username"] = mdr.GetString("Username");
                     //usr.Username.ToString();
+                    Session["phoneNumber"] = mdr.GetString("phoneNum");
                     mdr.Close();
                     return RedirectToAction("Loggedin");
                 }
@@ -109,6 +110,7 @@ namespace TemperatureV1._0.Controllers
             if (Session["UserID"] != null)
             {
                 // database
+                
                 var retrieveUsername = Session["Username"].ToString();
                 var retrieveUserId = Session["UserID"].ToString();
                 string[] ports = SerialPort.GetPortNames();
@@ -143,17 +145,19 @@ namespace TemperatureV1._0.Controllers
                        
 
                         insertToDbTemperature(x, dateSubmitting);
+                        
 
                         //sending SMS to user when temperature is low or high
-                        string phoneNumber = "447460456997";
+                        string phoneNumber = Session["phoneNumber"].ToString();
                         string txtMessage = "";
+                        //Keys for service
                         string txtUsername = "csibi.norbert@study.beds.ac.uk";
                         string txtPassword = "7qc14";
                         using (System.Net.WebClient client = new WebClient())
                         {
                             try
                             {//This needs to be changed when the resistor is applied
-                                if (x >94)
+                                if (x >100)
                                 {
                                     txtMessage = "Warning! Temperature too High. Please reduce the temperature in you house. Too much waste of Energy." +
                                                  "Regards," +
