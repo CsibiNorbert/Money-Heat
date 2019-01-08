@@ -33,6 +33,6 @@ namespace TemperatureV1._0.Models
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
-        public double dailyTemp { get; set; }
+       
     }
 }

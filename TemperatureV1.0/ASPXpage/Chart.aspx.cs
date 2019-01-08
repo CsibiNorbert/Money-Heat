@@ -35,7 +35,7 @@ namespace TemperatureV1._0.ASPXpage
         private  List<double> userTemperatureListOct = new List<double>();
         private  List<double> userTemperatureListNov = new List<double>();
         private  List<double> userTemperatureListDec = new List<double>();
-        DateTime currentUserDate = DateTime.Now;
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -63,64 +63,131 @@ namespace TemperatureV1._0.ASPXpage
 
 
             var mych = new System.Web.Helpers.Chart(800, 200, ChartTheme.Green);
+          
             adp.Dispose();
             dt.Dispose();
+            int x=0;
+            int pp = 0;
             foreach (var date in userDatesDictionary)
             {
-                if (currentUserDate.Month == date.Value.Month)
-                {
-                    foreach (var temper in userTemperaturesDictionary)
+
+                    foreach (var temper in userTemperaturesDictionary.ToArray())
                     {
-                        if ((currentUserDate.Month == 1) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                       
+                        pp = temper.Key + x;
+                    if ((1 == date.Value.Month) && (date.Key == (temper.Key+x)))
                         {
-                            userTemperatureListJanuary.Add(temper.Value);
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListJanuary.Add(d);
+                            }
+                            
                         }
-                        if ((currentUserDate.Month == 2) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ( (2 == date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListFeb.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListFeb.Add(d);
+                            }
                         }
-                        if ((currentUserDate.Month == 3) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ((3 == date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListMarch.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListMarch.Add(d);
+                            }
                         }
-                        if ((currentUserDate.Month == 4) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ((4 == date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListApr.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListApr.Add(d);
+                            }
                         }
-                        if ((currentUserDate.Month == 5) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ((5 == date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListMay.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListMay.Add(d);
+                            }
                         }
-                        if ((currentUserDate.Month == 6) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ((6 == date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListJun.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListJun.Add(d);
+                            }
                         }
-                        if ((currentUserDate.Month == 7) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ((7 == date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListJul.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListJul.Add(d);
+                            }
                         }
-                        if ((currentUserDate.Month == 8) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ((8 == date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListAug.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListAug.Add(d);
+                            }
                         }
-                        if ((currentUserDate.Month == 9) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ((9 == date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListSept.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListSept.Add(d);
+                            }
                         }
-                        if ((currentUserDate.Month == 10) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ((10 == date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListOct.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListOct.Add(d);
+                            }
                         }
-                        if ((currentUserDate.Month == 11) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ((11 == date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListNov.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListNov.Add(d);
+                            }
                         }
-                        if ((currentUserDate.Month == 12) && (currentUserDate.Year == date.Value.Year) && (date.Key == temper.Key))
+                        if ((12== date.Value.Month) && (date.Key == temper.Key + x))
                         {
-                            userTemperatureListDec.Add(temper.Value);
+
+                            if (userTemperaturesDictionary.ContainsKey(pp))
+                            {
+                                double d = userTemperaturesDictionary[pp];
+                                userTemperatureListDec.Add(d);
+                            }
                         }
-                    }
+                        x++;
+
+                    break;
                 }
+                
                
             
             }
@@ -238,8 +305,7 @@ namespace TemperatureV1._0.ASPXpage
                 avgUserTemperatureJDec = userTemperatureListDec.Average();
             }
             
-
-
+          
             mych.AddTitle("Monthly Average Temperature")
                 .AddSeries(
                     "Month",

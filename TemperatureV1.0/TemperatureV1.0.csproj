@@ -255,11 +255,13 @@
       <DependentUpon>Chart.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DbMyContext.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -324,6 +326,7 @@
     <Content Include="Views\Customer\Loggedin.cshtml" />
     <Content Include="Views\Customer\myChart.cshtml" />
     <Content Include="Views\Customer\tableDanger.cshtml" />
+    <Content Include="Views\Payment\makePayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

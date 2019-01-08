@@ -1,50 +1,61 @@
 ﻿.loginHeader {
-    float: left;
-    margin: 0px;
-    position: absolute;
-    right: 45%;
+    position: relative;
+    margin: 0 auto;
+    right: -50%;
+    margin-bottom: 0px;
 }
 
 
-.uNametxt {
-    float: left;
+.uNametxt {/*
+ float: left;
     left: 300px;
     margin-top: 0px;
     position: absolute;
     right: 30%;
     top: 25%;
+           */
+   
 }
 
 .LblUname {
-    position: relative;
+    /*/
+ position: relative;
     top: 27.6%;
+    */
+   
 }
 
 .lblPass {
-    float: left;
-    left: 390px; /*455*/
+    /*
+float: left;
+    left: 390px; 
     margin-top: 25px;
     position: relative;
     top: 44%;   
+    */
+    
 }
 
 .txtPass {
-    float: left;
+    /*/float: left;
     margin-top: 26px;
     position: absolute;
-    right: 29.9%; /*19.9*/
+    right: 29.9%; 
     top: 35%;
     width: 285px;
-}
 
+    */
+    
+}
+.form-horizontal {
+    position: relative;
+    right: -25%;
+    top: -40%;
+}
 .divbtnLogin {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-top: 1%;
-    position: absolute;
-    right: 52.5%;
-    top: 50%;
+    margin: 0 auto;
+    position: relative;
+    right: -300px;
 }
 
 .chartClass {

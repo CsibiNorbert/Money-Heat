@@ -37,7 +37,7 @@ else
     <div class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">MoneyHeat</a>
+                <a class="navbar-brand" href=@Url.Action("Loggedin", "Customer")>MoneyHeat</a>
             </div>
             <ul class="nav navbar-nav">
                 @* <li ">@Html.ActionLink("Login", "Login", "Customer")</li>
@@ -45,6 +45,7 @@ else
 
     <li>@Html.ActionLink("Register", "Register", "Customer")</li>*@
                 <li><a target="_blank" href="@Url.Content("~/ASPXpage/Chart.aspx")">Average Chart</a></li>
+                <li>@Html.ActionLink("Add Payment","makePayment","Payment")</li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

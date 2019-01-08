@@ -6,13 +6,17 @@ function update() {
     
 
 };
+function refreshMoneey() {
+    $(".refreshMoney").load(" .refreshMoney");
+}
+setInterval(refreshMoneey, 100);
 function updateMain() {
     $(".WholePage").load(" .WholePage");
 
 };
 
-setInterval(updateMain, 2000);
-setInterval(update, 1000);
+setInterval(updateMain, 20000);
+setInterval(update, 15000);
 
 //tabledanger
 function x() {

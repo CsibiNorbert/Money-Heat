@@ -323,11 +323,7 @@ namespace TemperatureV1._0.Controllers
             return View();
         }
 
-        public ActionResult ourProject()
-        {
-           
-            return View();
-        }
+        
 
         public  void insertToDbTemperature(double x, string date)
         {
