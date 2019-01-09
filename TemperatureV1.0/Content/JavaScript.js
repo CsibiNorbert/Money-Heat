@@ -47,3 +47,4 @@ $(document).on('click', '.panel-heading span.clickable', function (e) {
 function closeModal() {
     $('.modal').modal('toggle');
 };
+

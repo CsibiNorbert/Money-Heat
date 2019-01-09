@@ -125,6 +125,8 @@ namespace TemperatureV1._0.Controllers
                 {
                     ViewBag.DeviceOff = false;
                     ViewBag.DailyTempOff = "DEVICE OFF";
+
+
                 }
                 else
                 {
@@ -163,24 +165,24 @@ namespace TemperatureV1._0.Controllers
                                     txtMessage = "Warning! Temperature too High. Please reduce the temperature in you house. Too much waste of Energy." +
                                                  "Regards," +
                                                  "MoneyHeat Team";
-                                    string url = "http://smsc.vianett.no/v3/send.ashx?" + "src=" + phoneNumber + "&" + "dst=" + phoneNumber + "&" +
-                                                 "msg=" + System.Web.HttpUtility.UrlEncode(txtMessage, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" + "username=" + System.Web.HttpUtility.UrlEncode(txtUsername) + "&" + "password=" + System.Web.HttpUtility.UrlEncode(txtPassword);
+                                   // string url = "http://smsc.vianett.no/v3/send.ashx?" + "src=" + phoneNumber + "&" + "dst=" + phoneNumber + "&" +
+                                                 //"msg=" + System.Web.HttpUtility.UrlEncode(txtMessage, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" + "username=" + System.Web.HttpUtility.UrlEncode(txtUsername) + "&" + "password=" + System.Web.HttpUtility.UrlEncode(txtPassword);
 
-                                    string result = client.DownloadString(url);
-                                    if (result.Contains("OK"))
+                                    //string result = client.DownloadString(url);
+                                    //if (result.Contains("OK"))
                                     {
 
                                     }
-                                }else if (x < 0)
+                                }else if (x < -200)
                                 {
                                     txtMessage = "Warning! Temperature too Low. Your house will be cold." +
                                                  "Regards," +
                                                  "MoneyHeat Team";
-                                    string url = "http://smsc.vianett.no/v3/send.ashx?" + "src=" + phoneNumber + "&" + "dst=" + phoneNumber + "&" +
-                                                 "msg=" + System.Web.HttpUtility.UrlEncode(txtMessage, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" + "username=" + System.Web.HttpUtility.UrlEncode(txtUsername) + "&" + "password=" + System.Web.HttpUtility.UrlEncode(txtPassword);
+                                    //string url = "http://smsc.vianett.no/v3/send.ashx?" + "src=" + phoneNumber + "&" + "dst=" + phoneNumber + "&" +
+                                                // "msg=" + System.Web.HttpUtility.UrlEncode(txtMessage, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" + "username=" + System.Web.HttpUtility.UrlEncode(txtUsername) + "&" + "password=" + System.Web.HttpUtility.UrlEncode(txtPassword);
 
-                                    string result = client.DownloadString(url);
-                                    if (result.Contains("OK"))
+                                   // string result = client.DownloadString(url);
+                                   // if (result.Contains("OK"))
                                     {
 
                                     }
@@ -195,6 +197,81 @@ namespace TemperatureV1._0.Controllers
                             }
                         }
 
+
+                        connection.Open();
+                        var retrieveUsernamev = Session["Username"].ToString();
+                        //string retrieveUsername = userLoggin.Username.ToString();
+                        var retrieveUser = "SELECT * FROM temperature WHERE Username='" + retrieveUsernamev + "';";
+                        string x1 = null;
+                        string tempDates;
+                        DateTime dates;
+                        try
+                        {
+                            cmd = new MySqlCommand(retrieveUser, connection);
+
+                            //MySqlDataReader mdr = cmd.ExecuteReader();
+                            var ds = new DataTable();
+                            var adapter = new MySqlDataAdapter(retrieveUser, connection);
+
+
+                            adapter.Fill(ds);
+
+                            foreach (DataRow row in ds.Rows)
+                            {
+                                x1 = row["temperature"].ToString();
+
+                                DateTime.TryParse(row["dateTemp"].ToString(), out dates);
+
+                                intList.Add(x1);
+                                tempDates = dates.ToString("Y");
+                                dateList.Add(Convert.ToDateTime(tempDates));
+                            }
+
+                            adapter.Dispose();
+                            cmd.Dispose();
+                            ds.Dispose();
+
+
+
+                           
+                            var retrieveMaxTemp = "SELECT MAX(temperature) from temperature WHERE Username='" + retrieveUsernamev +
+                                                  "' AND dateTemp='" + dateSubmitting + "';";
+                            var retrieveMinTemp = "SELECT MIN(temperature) from temperature WHERE Username='" + retrieveUsernamev +
+                                                  "' AND dateTemp='" + dateSubmitting + "';";
+                            var dsO = new DataTable();
+                            var adapterO = new MySqlDataAdapter(retrieveMaxTemp, connection);
+                            adapterO.Fill(dsO);
+                            foreach (DataRow row in dsO.Rows)
+                            {
+                                maxTemp = Convert.ToDouble(row["MAX(temperature)"]);
+
+
+                            }
+                            dsO.Dispose();
+                            adapterO.Dispose();
+                            var dsM = new DataTable();
+                            var adapterM = new MySqlDataAdapter(retrieveMinTemp, connection);
+                            adapterM.Fill(dsM);
+                            foreach (DataRow row in dsM.Rows)
+                            {
+                                minTemp = Convert.ToDouble(row["MIN(temperature)"]);
+
+
+                            }
+                            ViewBag.Temperatures = intList;
+
+                            ViewBag.maxTemperature = maxTemp;
+                            ViewBag.minTemperature = minTemp;
+
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
+
                         port.Dispose();
                         port.Close();
                     }
@@ -207,78 +284,6 @@ namespace TemperatureV1._0.Controllers
                 
 
 
-                connection.Open();
-                var retrieveUsernamev = Session["Username"].ToString();
-                //string retrieveUsername = userLoggin.Username.ToString();
-                var retrieveUser = "SELECT * FROM temperature WHERE Username='" + retrieveUsernamev + "';";
-                string x1 = null;
-                string tempDates;
-                DateTime dates;
-                try
-                {
-                    cmd = new MySqlCommand(retrieveUser, connection);
-
-                    //MySqlDataReader mdr = cmd.ExecuteReader();
-                    var ds = new DataTable();
-                    var adapter = new MySqlDataAdapter(retrieveUser, connection);
-
-
-                    adapter.Fill(ds);
-
-                    foreach (DataRow row in ds.Rows)
-                    {
-                        x1 = row["temperature"].ToString();
-
-                        DateTime.TryParse(row["dateTemp"].ToString(), out dates);
-
-                        intList.Add(x1);
-                        tempDates = dates.ToString("Y");
-                        dateList.Add(Convert.ToDateTime(tempDates));
-                    }
-
-                    adapter.Dispose();
-                    cmd.Dispose();
-                    ds.Dispose();
-
-                    
-                    var retrieveMaxTemp = "SELECT MAX(temperature) from temperature WHERE Username='" + retrieveUsernamev +
-                                          "' AND dateTemp='" + dateSubmitting + "';";
-                    var retrieveMinTemp = "SELECT MIN(temperature) from temperature WHERE Username='" + retrieveUsernamev +
-                                          "' AND dateTemp='" + dateSubmitting + "';";
-
-                    var dsO = new DataTable();
-                    var adapterO = new MySqlDataAdapter(retrieveMaxTemp, connection);
-                    adapterO.Fill(dsO);
-                    foreach (DataRow row in dsO.Rows)
-                    {
-                        maxTemp = Convert.ToDouble(row["MAX(temperature)"]);
-
-
-                    }
-                    dsO.Dispose();
-                    adapterO.Dispose();
-                    var dsM = new DataTable();
-                    var adapterM = new MySqlDataAdapter(retrieveMinTemp, connection);
-                    adapterM.Fill(dsM);
-                    foreach (DataRow row in dsM.Rows)
-                    {
-                        minTemp = Convert.ToDouble(row["MIN(temperature)"]);
-
-
-                    }
-                    ViewBag.Temperatures = intList;
-
-                    ViewBag.maxTemperature = maxTemp;
-                    ViewBag.minTemperature = minTemp;
-                    
-
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
 
 
                 return View();
