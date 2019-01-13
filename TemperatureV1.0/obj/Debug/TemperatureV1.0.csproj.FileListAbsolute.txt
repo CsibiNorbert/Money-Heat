@@ -97,6 +97,7 @@ C:\Users\cibi_\documents\visual studio 2015\Projects\TemperatureV1.0\Temperature
 C:\Users\cibi_\documents\visual studio 2015\Projects\TemperatureV1.0\TemperatureV1.0\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\cibi_\documents\visual studio 2015\Projects\TemperatureV1.0\TemperatureV1.0\obj\Debug\TemperatureV1.0.dll
 C:\Users\cibi_\documents\visual studio 2015\Projects\TemperatureV1.0\TemperatureV1.0\obj\Debug\TemperatureV1.0.pdb
+C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\TemperatureV1.0.pdb
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\ApplicationInsights.config
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\roslyn\csc.exe
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -112,7 +113,6 @@ C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\roslyn\VBCSCompiler.e
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\TemperatureV1.0.dll.config
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\TemperatureV1.0.dll
-C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\TemperatureV1.0.pdb
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\Antlr3.Runtime.dll
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\Arduino4Net.dll
 C:\Users\cibi_\Source\Repos\Money-Heat\TemperatureV1.0\bin\ArduinoSerialControllerClient.dll

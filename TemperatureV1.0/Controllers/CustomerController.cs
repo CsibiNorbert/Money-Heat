@@ -153,36 +153,36 @@ namespace TemperatureV1._0.Controllers
                         //sending SMS to user when temperature is low or high
                         string phoneNumber = Session["phoneNumber"].ToString();
                         string txtMessage = "";
-                        //Keys for service
-                        string txtUsername = "csibi.norbert@study.beds.ac.uk";
-                        string txtPassword = "7qc14";
+                        //Keys for API
+                        string txtUsername = "csibilaura@yahoo.com";
+                        string txtPassword = "bkeyl";
                         using (System.Net.WebClient client = new WebClient())
                         {
                             try
                             {//This needs to be changed when the resistor is applied
-                                if (x >100)
+                                if (x >300)
                                 {
                                     txtMessage = "Warning! Temperature too High. Please reduce the temperature in you house. Too much waste of Energy." +
                                                  "Regards," +
                                                  "MoneyHeat Team";
-                                   // string url = "http://smsc.vianett.no/v3/send.ashx?" + "src=" + phoneNumber + "&" + "dst=" + phoneNumber + "&" +
-                                                 //"msg=" + System.Web.HttpUtility.UrlEncode(txtMessage, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" + "username=" + System.Web.HttpUtility.UrlEncode(txtUsername) + "&" + "password=" + System.Web.HttpUtility.UrlEncode(txtPassword);
+                                   string url = "http://smsc.vianett.no/v3/send.ashx?" + "src=" + phoneNumber + "&" + "dst=" + phoneNumber + "&" +
+                                                 "msg=" + System.Web.HttpUtility.UrlEncode(txtMessage, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" + "username=" + System.Web.HttpUtility.UrlEncode(txtUsername) + "&" + "password=" + System.Web.HttpUtility.UrlEncode(txtPassword);
 
-                                    //string result = client.DownloadString(url);
-                                    //if (result.Contains("OK"))
+                                    string result = client.DownloadString(url);
+                                    if (result.Contains("OK"))
                                     {
 
                                     }
-                                }else if (x < -200)
+                                }else if (x < 16)
                                 {
                                     txtMessage = "Warning! Temperature too Low. Your house will be cold." +
                                                  "Regards," +
                                                  "MoneyHeat Team";
-                                    //string url = "http://smsc.vianett.no/v3/send.ashx?" + "src=" + phoneNumber + "&" + "dst=" + phoneNumber + "&" +
-                                                // "msg=" + System.Web.HttpUtility.UrlEncode(txtMessage, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" + "username=" + System.Web.HttpUtility.UrlEncode(txtUsername) + "&" + "password=" + System.Web.HttpUtility.UrlEncode(txtPassword);
+                                    string url = "http://smsc.vianett.no/v3/send.ashx?" + "src=" + phoneNumber + "&" + "dst=" + phoneNumber + "&" +
+                                                "msg=" + System.Web.HttpUtility.UrlEncode(txtMessage, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" + "username=" + System.Web.HttpUtility.UrlEncode(txtUsername) + "&" + "password=" + System.Web.HttpUtility.UrlEncode(txtPassword);
 
-                                   // string result = client.DownloadString(url);
-                                   // if (result.Contains("OK"))
+                                   string result = client.DownloadString(url);
+                                   if (result.Contains("OK"))
                                     {
 
                                     }
